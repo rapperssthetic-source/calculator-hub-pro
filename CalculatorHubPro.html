@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculator Hub Pro</title>
+<meta name="description" content="All-in-one calculator hub with multiple calculators, dark mode and ad-ready layout.">
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f4f4;color:#222}
+body.dark{background:#111827;color:#fff}
+header{background:#2563eb;color:#fff;padding:15px;text-align:center}
+.wrap{max-width:1200px;margin:auto;padding:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}
+.card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.dark .card{background:#1f2937}
+input,button,select{width:100%;padding:10px;margin:5px 0}
+.ad{border:2px dashed #999;padding:20px;text-align:center;margin:15px 0}
+.result{font-weight:bold}
+</style>
+</head>
+<body>
+<header><h1>Calculator Hub Pro</h1><button onclick="document.body.classList.toggle('dark')">Dark/Light Mode</button></header>
+<div class="wrap">
+<div class="ad">Google AdSense Placeholder</div>
+<div class="grid">
+
+<div class="card"><h3>Standard Calculator</h3><input id="std"><button onclick="calc()">Calculate</button><div id="stdr" class="result"></div></div>
+
+<div class="card"><h3>BMI</h3><input id="w" placeholder="Weight kg"><input id="h" placeholder="Height m"><button onclick="bmi()">Calculate BMI</button><div id="bmir" class="result"></div></div>
+
+<div class="card"><h3>Age Calculator</h3><input type="date" id="dob"><button onclick="age()">Calculate Age</button><div id="ager" class="result"></div></div>
+
+<div class="card"><h3>Percentage</h3><input id="p1" placeholder="Value"><input id="p2" placeholder="Total"><button onclick="perc()">Calculate</button><div id="percr" class="result"></div></div>
+
+<div class="card"><h3>Discount</h3><input id="d1" placeholder="Price"><input id="d2" placeholder="Discount %"><button onclick="disc()">Calculate</button><div id="discr" class="result"></div></div>
+
+<div class="card"><h3>Tip Calculator</h3><input id="t1" placeholder="Bill"><input id="t2" placeholder="Tip %"><button onclick="tip()">Calculate</button><div id="tipr" class="result"></div></div>
+
+<div class="card"><h3>GST/VAT</h3><input id="g1" placeholder="Amount"><input id="g2" placeholder="Tax %"><button onclick="gst()">Calculate</button><div id="gstr" class="result"></div></div>
+
+<div class="card"><h3>EMI</h3><input id="e1" placeholder="Loan"><input id="e2" placeholder="Rate %"><input id="e3" placeholder="Months"><button onclick="emi()">Calculate</button><div id="emir" class="result"></div></div>
+
+<div class="card"><h3>Scientific</h3><input id="s1" placeholder="Number"><button onclick="sci('sqrt')">√</button><button onclick="sci('sq')">x²</button><div id="scir" class="result"></div></div>
+
+</div>
+</div>
+<script>
+function calc(){try{stdr.innerText=eval(std.value)}catch(e){stdr.innerText='Error'}}
+function bmi(){bmir.innerText=(w.value/(h.value*h.value)).toFixed(2)}
+function age(){let d=new Date(dob.value); ager.innerText=Math.floor((Date.now()-d)/31557600000)+' years'}
+function perc(){percr.innerText=((p1.value/p2.value)*100).toFixed(2)+'%'}
+function disc(){discr.innerText=(d1.value-(d1.value*d2.value/100)).toFixed(2)}
+function tip(){tipr.innerText=(t1.value*(1+ t2.value/100)).toFixed(2)}
+function gst(){gstr.innerText=(g1.value*(1+g2.value/100)).toFixed(2)}
+function emi(){let P=+e1.value,r=(+e2.value/12/100),n=+e3.value; let m=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1); emir.innerText=isFinite(m)?m.toFixed(2):'Invalid'}
+function sci(t){let v=+s1.value; scir.innerText=t=='sqrt'?Math.sqrt(v):v*v}
+</script>
+</body></html>
